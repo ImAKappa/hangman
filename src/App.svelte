@@ -6,7 +6,7 @@
 </script>
 
 <main>
-    <div class="bg-amber-900 p-0.5">
+    <div class="bg-amber-700 p-0.5 border-b-amber-900 border-b-2">
         <h1 class="my-4 text-3xl font-bold text-center">Hangman</h1>
     </div>
     <!-- The app should only ever be in Menu mode or Game (Guessing) mode -->
@@ -18,10 +18,10 @@
         <div class="flex flex-col items-center m-0 p-0">
             <!-- GameOver: Tell player if they won or lost -->
             {#if $gameOver}
-            <div class="outline outline-blue-500">
-                <p>You {$gameWon ? 'Won' : 'Lost'}!</p>
+            <div class="flex flex-col w-screen">
+                <p class="text-center text-white py-2 px-2 {$gameWon ? 'bg-green-500': 'bg-red-500'}">You {$gameWon ? 'Won! :)' : 'Lost :('}</p>
                 <!-- Back to menu -->
-                <button class="bg-amber-700 outline outline-amber-900 rounded-none text-white mt-4 px-4 py-2 w-24" on:click="{() => gameMenu.set(true)}">Play Again</button>
+                <button class="self-center bg-amber-700 outline outline-amber-900 rounded-none text-white my-2 px-4 py-2 w-28" on:click="{() => gameMenu.set(true)}">Play Again</button>
             </div>
             {/if}
 

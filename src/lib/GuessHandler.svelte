@@ -80,27 +80,37 @@
     }
 </script>
 
-<div>
+<div class="flex flex-col items-center">
     <!-- Hidden Word/phrase 
         All (English) letters are hidden, but punctuation and numbers are shown
     -->
-    <h3 class="text-center">Word/Phrase:</h3>
-    <p class="word-phrase">{hiddenWord}</p>
+    <div>
+        <h3 class="text-center font-bold my-2">Word/Phrase:</h3>
+        <p class="text-center tracking-[1em]">{hiddenWord}</p>
+    </div>
 
     <!-- Wrong guesses -->
-    <h3>Wrong guesses</h3>
-    <p class="wrong-guesses">{$wrongGuesses}</p>
+    <div>
+        <h3 class="text-center font-bold my-2">Wrong guesses</h3>
+        <p class="text-center">{$wrongGuesses}</p>
+    </div>
 
     <!-- Remaining guesses -->
-    <h3>Remaining Guesses</h3>
-    <p class="remaining-guesses">{remainingGuesses}</p>
+    <div>
+        <h3 class="text-center font-bold my-2">Remaining Guesses</h3>
+        <p class="text-center">{remainingGuesses}</p>
+    </div>
 
     <!-- Next guess -->
-    <h3>Next guess</h3>
-    {#each alphabet as letter}
-    <!-- User can only guess same letter once -->
-    <button class="guess" disabled={$gameOver} on:click={checkGuess}>{letter}</button>
-    {/each}
+    <div class="flex flex-col items-center">
+        <h3 class="font-bold my-2">Next guess</h3>
+        <div class="grid grid-cols-7 gap-1">
+        {#each alphabet as letter}
+        <!-- User can only guess same letter once -->
+        <button class="bg-amber-700 outline outline-amber-900 rounded-none text-white m-1 p-1 disabled:opacity-50" disabled={$gameOver} on:click={checkGuess}>{letter}</button>
+        {/each}
+        </div>
+    </div>
 </div>
 
 <style>
