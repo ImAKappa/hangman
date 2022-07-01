@@ -11,8 +11,8 @@
     // Clear wrong guesses
     wrongGuesses.set([]);
     // Clear category and word
-    category.set("my category");
-    word.set("my word");
+    // category.set("my category");
+    // word.set("my word");
     /* Reset remaining guesses - but a hacky way of doing it
      * Tried to convert remainingGuesses to a derived store, but they are not writable
      *    It was tough to init remainingGuesses with maxGuesses, but also let remainingGuesses update independent of maxGuesses
