@@ -20,8 +20,6 @@
             {#if $gameOver}
             <div class="flex flex-col w-screen">
                 <p class="text-center text-white py-2 px-2 {$gameWon ? 'bg-green-500': 'bg-red-500'}">You {$gameWon ? 'Won! :)' : 'Lost :('}</p>
-                <!-- Back to menu -->
-                <button class="self-center bg-amber-700 outline outline-amber-900 rounded-none text-white my-2 px-4 py-2 w-28" on:click="{() => gameMenu.set(true)}">Play Again</button>
             </div>
             {/if}
 
@@ -38,7 +36,9 @@
             <GuessHandler />
 
             <!-- Exit game button -->
-            <button class="self-center bg-amber-700 outline outline-amber-900 rounded-none text-white my-4 px-4 py-2" on:click="{() => gameMenu.set(true)}">Return to Menu</button>
+            <button class="self-center bg-amber-700 outline outline-amber-900 rounded-none text-white my-4 px-4 py-2" on:click="{() => gameMenu.set(true)}">
+                {$gameOver ? 'Play Again?' : 'Return to Menu'}
+            </button>
         </div>
     {/if}
 </main>
