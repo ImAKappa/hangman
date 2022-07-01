@@ -36,6 +36,9 @@
 
             <!-- Core gameplay logic -->
             <GuessHandler />
+
+            <!-- Exit game button -->
+            <button class="self-center bg-amber-700 outline outline-amber-900 rounded-none text-white my-4 px-4 py-2" on:click="{() => gameMenu.set(true)}">Return to Menu</button>
         </div>
     {/if}
 </main>

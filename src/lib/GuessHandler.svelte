@@ -86,7 +86,7 @@
     -->
     <div>
         <h3 class="text-center font-bold my-2">Word/Phrase:</h3>
-        <p class="text-center tracking-[1em]">{hiddenWord}</p>
+        <p class="text-center indent-[1em] tracking-[1em]">{hiddenWord}</p>
     </div>
 
     <!-- Wrong guesses -->
@@ -104,7 +104,8 @@
     <!-- Next guess -->
     <div class="flex flex-col items-center">
         <h3 class="font-bold my-2">Next guess</h3>
-        <div class="grid grid-cols-7 gap-1">
+        <!-- TODO: Convert to flex box to center-align dangling letters in last row -->
+        <div class="grid grid-cols-8 gap-1"> 
         {#each alphabet as letter}
         <!-- User can only guess same letter once -->
         <button class="bg-amber-700 outline outline-amber-900 rounded-none text-white m-1 p-1 disabled:opacity-50" disabled={$gameOver} on:click={checkGuess}>{letter}</button>
