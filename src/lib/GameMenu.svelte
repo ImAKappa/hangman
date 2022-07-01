@@ -26,24 +26,35 @@
   }
 </script>
 
-<div>
-    <h2>Game Settings</h2>
+<!-- Game Menu -->
+<div class="flex flex-col p-4 items-center self-stretch">
+    <h2 class="text-2xl text-center font-bold">Game Settings</h2>
 
-    <!-- Hangman restricts players to a limited number of guesses -->
-    <h3>Enter maximum number of guesses:</h3>
-    <!-- 0 remaining guesses means infinite guesses -->
-    <input type="number" name="attempts" class="attempts" min="0" bind:value={$maxGuesses}>
+    <!-- Game Settings -->
+    <div class="flex flex-col items-center content-between m-0 p-0">
+        <!-- Remaining Guesses -->
+        <div class="flex flex-row items-center mt-4">
+            <!-- 0 remaining guesses means infinite guesses -->
+            <input type="number" name="attempts" class="text-center w-24 mr-2 outline outline-blue-500" min="0" bind:value={$maxGuesses}>
+            <!-- Hangman restricts players to a limited number of guesses -->
+            <h3 class="text-center">guesses maximum</h3>
+        </div>
 
-    <!-- Category: It's up to the players to make sure their word belongs to the category -->
-    <h3 class="category">Enter Category:</h3>
-    <input type="text" name="category" class="category" bind:value={$category}>
+        <!-- Category: It's up to the players to make sure their word belongs to the category -->
+        <div class="flex flex-col mt-4">
+            <h3 class="text-center">The category is</h3>
+            <input type="text" name="category" class="uppercase text-center outline outline-blue-500 m-1" bind:value={$category}>
+        </div>
 
-    <!-- Word/phrase: 30 characters max is a bit arbitrary, 
-        but it's included to limit players to guessable words/phrases -->
-    <h3>Enter Word/Phrase:</h3>
-    <!-- Transform text to uppercase using CSS -->
-    <input type="text" name="word-phrase" class="word" maxlength="30" bind:value={$word}>
+        <!-- Word/phrase: 30 characters max is a bit arbitrary, 
+            but it's included to limit players to guessable words/phrases -->
+        <div class="flex flex-col mt-4">
+            <h3 class="text-center">The secret word/phrase is</h3>
+            <!-- Transform text to uppercase using CSS -->
+            <input type="text" name="word-phrase" class="uppercase text-center outline outline-blue-500 m-1" maxlength="30" bind:value={$word}>
+        </div>
+    </div>
 
     <!-- Reset game, should only be enabled on gameOver -->
-    <button class="play-game" on:click={playGame}>Play</button>
+    <button class="bg-amber-700 outline outline-amber-900 rounded-none text-white mt-4 px-4 py-2 w-24" on:click={playGame}>Play</button>
 </div>

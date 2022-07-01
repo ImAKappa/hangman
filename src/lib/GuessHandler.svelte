@@ -84,7 +84,7 @@
     <!-- Hidden Word/phrase 
         All (English) letters are hidden, but punctuation and numbers are shown
     -->
-    <h3>Word/Phrase:</h3>
+    <h3 class="text-center">Word/Phrase:</h3>
     <p class="word-phrase">{hiddenWord}</p>
 
     <!-- Wrong guesses -->

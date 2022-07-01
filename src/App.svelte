@@ -1,11 +1,14 @@
 <script lang="ts">
-  import { gameOver, gameWon, gameMenu, category} from "./lib/store";
-  import GameMenu from "./lib/GameMenu.svelte";
-  import GuessHandler from "./lib/GuessHandler.svelte";
+    import "./app.css";
+    import { gameOver, gameWon, gameMenu, category} from "./lib/store";
+    import GameMenu from "./lib/GameMenu.svelte";
+    import GuessHandler from "./lib/GuessHandler.svelte";
 </script>
 
 <main>
-    <h1>Hangman</h1>
+    <div class="bg-amber-900 p-0.5">
+        <h1 class="my-4 text-3xl font-bold text-center">Hangman</h1>
+    </div>
     <!-- The app should only ever be in Menu mode or Game (Guessing) mode -->
     {#if $gameMenu}
         <!-- Game Menu -->
@@ -31,9 +34,3 @@
         <GuessHandler />
     {/if}
 </main>
-
-<style global lang="postcss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-</style>
