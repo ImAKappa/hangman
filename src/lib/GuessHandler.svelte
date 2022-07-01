@@ -114,9 +114,9 @@
     </div>
 </div>
 
-<style>
+<!-- <style>
     p.word-phrase {
         letter-spacing: 1.0em;
         word-spacing: 1em;
     }
-</style>
+</style> -->

@@ -3,6 +3,7 @@
     import { gameOver, gameWon, gameMenu, category} from "./lib/store";
     import GameMenu from "./lib/GameMenu.svelte";
     import GuessHandler from "./lib/GuessHandler.svelte";
+    import Hangman from "./lib/Hangman.svelte";
 </script>
 
 <main>
@@ -31,6 +32,7 @@
 
             <!-- Simulation of hangman with ragdoll physics and boxes -->
             <!-- <canvas class="hangman"></canvas> -->
+            <Hangman />
 
             <!-- Core gameplay logic -->
             <GuessHandler />

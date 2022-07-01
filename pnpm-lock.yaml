@@ -3,7 +3,9 @@ lockfileVersion: 5.4
 specifiers:
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.30
   '@tsconfig/svelte': ^3.0.0
+  '@types/matter-js': ^0.17.7
   autoprefixer: ^10.4.7
+  matter-js: ^0.18.0
   postcss: ^8.4.14
   postcss-load-config: ^4.0.1
   svelte: ^3.44.0
@@ -12,6 +14,10 @@ specifiers:
   tailwindcss: ^3.1.4
   typescript: ^4.7.4
   vite: ^2.9.9
+
+dependencies:
+  '@types/matter-js': 0.17.7
+  matter-js: 0.18.0
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.0.0-next.49_svelte@3.48.0+vite@2.9.13
@@ -99,6 +105,10 @@ packages:
   /@tsconfig/svelte/3.0.0:
     resolution: {integrity: sha512-pYrtLtOwku/7r1i9AMONsJMVYAtk3hzOfiGNekhtq5tYBGA7unMve8RvUclKLMT3PrihvJqUmzsRGh0RP84hKg==}
     dev: true
+
+  /@types/matter-js/0.17.7:
+    resolution: {integrity: sha512-LHx3Kf1vY68wEgSAuQkMShfGxB9YVKtcFYqPTMAcmUCnHuvcPkfnlbveMkH8xG/s1EIYcbBVTnUNDV/CA5B2RA==}
+    dev: false
 
   /@types/node/18.0.0:
     resolution: {integrity: sha512-cHlGmko4gWLVI27cGJntjs/Sj8th9aYwplmZFwmmgYQQvL5NUsgVJG7OddLvNfLqYS31KFN0s3qlaD9qCaxACA==}
@@ -662,6 +672,10 @@ packages:
     dependencies:
       sourcemap-codec: 1.4.8
     dev: true
+
+  /matter-js/0.18.0:
+    resolution: {integrity: sha512-/ZVem4WygUnbmo/iE4oHZpZS97btfBtYy5Iwn1396vUZU7YhgVEN8J4UWwfZwY1ZqoTYlPgjvSw9WXauuXL0mg==}
+    dev: false
 
   /merge2/1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
