@@ -31,7 +31,7 @@
     <h2 class="text-2xl text-center font-bold">Game Settings</h2>
 
     <!-- Game Settings -->
-    <div class="flex flex-col items-center content-between m-0 p-0">
+    <div class="flex flex-col items-center m-0 p-0">
         <!-- Remaining Guesses -->
         <div class="flex flex-row items-center mt-4">
             <!-- 0 remaining guesses means infinite guesses -->

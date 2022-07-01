@@ -15,22 +15,27 @@
         <GameMenu />
     {:else}
         <!-- Game -->
-        <h2>Game</h2>
-        <!-- Tell player if they won or lost -->
-        {#if $gameOver}
-            <p>You {$gameWon ? 'Won' : 'Lost'}!</p>
-            <!-- Back to menu -->
-            <button class="play-again" on:click="{() => gameMenu.set(true)}">Play Again</button>
-        {/if}
+        <div class="flex flex-col items-center m-0 p-0">
+            <!-- GameOver: Tell player if they won or lost -->
+            {#if $gameOver}
+            <div class="outline outline-blue-500">
+                <p>You {$gameWon ? 'Won' : 'Lost'}!</p>
+                <!-- Back to menu -->
+                <button class="bg-amber-700 outline outline-amber-900 rounded-none text-white mt-4 px-4 py-2 w-24" on:click="{() => gameMenu.set(true)}">Play Again</button>
+            </div>
+            {/if}
 
-        <!-- Show Players the category -->
-        <h3>Category</h3>
-        <p class="category">{$category}</p>
+            <!-- Show Players the category -->
+            <div class="my-4">
+                <h3 class="font-bold text-center">Category</h3>
+                <p class="text-center uppercase">{$category}</p>
+            </div>
 
-        <!-- Simulation of hangman with ragdoll physics and boxes -->
-        <!-- <canvas class="hangman"></canvas> -->
+            <!-- Simulation of hangman with ragdoll physics and boxes -->
+            <!-- <canvas class="hangman"></canvas> -->
 
-        <!-- Core gameplay logic -->
-        <GuessHandler />
+            <!-- Core gameplay logic -->
+            <GuessHandler />
+        </div>
     {/if}
 </main>
