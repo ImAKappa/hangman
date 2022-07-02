@@ -25,9 +25,9 @@
             {/if}
 
             <!-- Show Players the category -->
-            <div class="my-4">
-                <h3 class="font-bold text-center">Category</h3>
-                <p class="text-center uppercase">{$category}</p>
+            <div class="my-2">
+                <!-- <h3 class="font-bold text-center">Category</h3> -->
+                <p class="text-2xl text-center uppercase">{$category}</p>
             </div>
 
             <!-- Simulation of hangman with ragdoll physics and boxes -->

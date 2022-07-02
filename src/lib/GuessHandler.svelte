@@ -84,9 +84,9 @@
     <!-- Hidden Word/phrase 
         All (English) letters are hidden, but punctuation and numbers are shown
     -->
-    <div>
-        <h3 class="text-center font-bold my-2">Word/Phrase:</h3>
-        <p class="text-center indent-[1em] tracking-[1em]">{hiddenWord}</p>
+    <div class="my-2">
+        <!-- <h3 class="text-center font-bold my-2">Word/Phrase:</h3> -->
+        <p class="text-2xl text-center indent-[1em] tracking-[1em]">{hiddenWord}</p>
     </div>
 
     <!-- Wrong guesses -->
@@ -97,13 +97,13 @@
 
     <!-- Remaining guesses -->
     <div>
-        <h3 class="text-center font-bold my-2">Remaining Guesses</h3>
-        <p class="text-center">{remainingGuesses}</p>
+        <h3 class="text-center font-bold my-2">{remainingGuesses} remaining {remainingGuesses == 1 ? 'guess' : 'guesses'}</h3>
+        <!-- <p class="text-center">{remainingGuesses} remaining guesses</p> -->
     </div>
 
     <!-- Next guess -->
     <div class="flex flex-col items-center">
-        <h3 class="font-bold my-2">Next guess</h3>
+        <!-- <h3 class="font-bold my-2">Next guess</h3> -->
         <!-- TODO: Convert to flex box to center-align dangling letters in last row -->
         <div class="grid grid-cols-8 gap-1"> 
         {#each alphabet as letter}

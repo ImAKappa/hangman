@@ -45,8 +45,9 @@ but it turned out to be much more complicated than I thought.
 Front-end webdev is a bizarre world, but I'm getting used to it.
 
 **Hangman**: Instead of filling in the hangman as you would on pencil and paper,
-the webapp indicates remaining attempts using a stack of boxes below the hangman's feet.
-For each wrong guess, one box is removed, until eventually the hangman is suspended and dies (┬┬﹏┬┬)
+the webapp shows a live hangman on a platform. If players run out of lives, the platform drops, and then the hangmang suspends and dies (┬┬﹏┬┬)
+
+It would be cool if the rope was tied to the 'g' in 'Hangman', and when the rope drops, the background fades to black and you only see a spot light on the hanged man and a 'Play Again' button. Not sure how to implement that just yet.
 
 **Tech Stack**: 
 - [Svelte](https://svelte.dev/)
