@@ -73,16 +73,64 @@
         // gallows
         // let gallows = newGallows(0, sceneHeight / 2, sceneWidth, sceneHeight);
         // Composite.add(engine.world, gallows);
+        const SCALE = 0.8;
+        const STIFFNESS = 1.0;
 
-        Composite.add(engine.world, [newRagdoll(sceneWidth / 2, 0, 1.0)]);
+        let person = newRagdoll(sceneWidth / 2, sceneHeight / 2 - 10, SCALE);
+        let personHead = person.bodies.find(body => body.label === 'head')
+        // Composite.add(engine.world, [person]);
 
-        // create two boxes and a ground
-        // let boxA = Bodies.rectangle(sceneWidth / 2, sceneHeight - 300, 40, 40);
-        // let boxB = Bodies.rectangle(sceneWidth / 2, sceneHeight - 150, 40, 40);
-        let ground = Bodies.rectangle(sceneWidth, sceneHeight, sceneWidth * 2, 10, { isStatic: true});
+        let ceiling = Bodies.rectangle(sceneWidth, 0, sceneWidth * 2, 10, { isStatic: true});
+        // Composite.add(engine.world, [ceiling]);
 
-        // // add all of the bodies to the world
-        Composite.add(engine.world, [ground]);
+        // Create & add hangman
+        let hangmanConstraint = Matter.Constraint.create({
+            bodyA: personHead,
+            pointA: {
+                x: 0 * SCALE,
+                y: -23 * SCALE
+            },
+            pointB: {
+                x: -sceneWidth / 2,
+                y: -8 * SCALE
+            },
+            bodyB: ceiling,
+            stiffness: STIFFNESS,
+            render: {
+                visible: true,
+            }
+        });
+
+        let hangman = Composite.create({
+            bodies: [...person.bodies, ceiling],
+            constraints: [...person.constraints, hangmanConstraint],
+        });
+
+        Composite.add(engine.world, [hangman]);
+
+            // add mouse control
+        let mouse = Matter.Mouse.create(render.canvas);
+        let mouseConstraint = Matter.MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: {
+                    visible: false
+                },
+                bodyA: null,
+                bodyB: null,
+                id: null,
+                label: null,
+                length: null,
+                pointA: null,
+                pointB: null,
+            }
+        });
+
+        Composite.add(engine.world, mouseConstraint);
+
+        // keep the mouse in sync with rendering
+        render.mouse = mouse;
 
         // run the render
         Render.run(render);
@@ -96,5 +144,5 @@
 </script>
 
 <div class="flex justify-center">
-    <div  class="matter-js" bind:this={sceneElement}></div>
+    <div  class="matter-js bg-slate-500" bind:this={sceneElement}></div>
 </div>

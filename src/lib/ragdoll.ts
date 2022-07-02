@@ -1,14 +1,14 @@
 // Based on Matter.js ragdoll example (https://github.com/liabru/matter-js/blob/master/examples/ragdoll.js)
 import Matter from 'matter-js';
 
-const ragdollHead = (x, y, radius, scale) => {
+const ragdollHead = (x: number, y: number, radius: number, scale: number) => {
     let headOptions = Matter.Common.extend({
         label: 'head',
         collisionFilter: {
             group: Matter.Body.nextGroup(true)
         },
         chamfer: {
-            radius: [15 * scale, 15 * scale, 15 * scale, 15 * scale]
+            // radius: [15 * scale, 15 * scale, 15 * scale, 15 * scale]
         },
         render: {
             fillStyle: '#FFBC42'
@@ -17,14 +17,14 @@ const ragdollHead = (x, y, radius, scale) => {
     return Matter.Bodies.circle(x, y, radius, headOptions);
 }
 
-const ragdollTorso = (x, y, width, height, scale) => {
+const ragdollTorso = (x: number, y: number, width: number, height: number, scale: number) => {
     var torsoOptions = Matter.Common.extend({
         label: 'torso',
         collisionFilter: {
             group: Matter.Body.nextGroup(true)
         },
         chamfer: {
-            radius: [20 * scale, 20 * scale, 26 * scale, 26 * scale]
+            // radius: [20 * scale, 20 * scale, 26 * scale, 26 * scale]
         },
         render: {
             fillStyle: '#E0A423'
@@ -33,14 +33,14 @@ const ragdollTorso = (x, y, width, height, scale) => {
     return Matter.Bodies.rectangle(x, y, width, height, torsoOptions);
 }
 
-const ragdollArm = (x, y, width, height, scale, armLabel) => {
+const ragdollArm = (x: number, y: number, width: number, height: number, scale: number, armLabel: string) => {
     let armOptions = Matter.Common.extend({
         label: armLabel,
         collisionFilter: {
             group: Matter.Body.nextGroup(true)
         },
         chamfer: {
-            radius: 10 * scale
+            // radius: 10 * scale
         },
         render: {
             fillStyle: '#FFBC42'
@@ -49,14 +49,14 @@ const ragdollArm = (x, y, width, height, scale, armLabel) => {
     return Matter.Bodies.rectangle(x, y, width, height, armOptions);
 }
 
-const ragdollLeg = (x, y, width, height, scale, legLabel) => {
+const ragdollLeg = (x: number, y: number, width: number, height: number, scale: number, legLabel: string) => {
     var legOptions = Matter.Common.extend({
         label: legLabel,
         collisionFilter: {
             group: Matter.Body.nextGroup(true)
         },
         chamfer: {
-            radius: 10 * scale
+            // radius: 10 * scale
         },
         render: {
             fillStyle: '#FFBC42'
@@ -65,7 +65,16 @@ const ragdollLeg = (x, y, width, height, scale, legLabel) => {
     return Matter.Bodies.rectangle(x, y, width, height, legOptions);
 }
 
-const constrainBodyParts = (head, torso, leftArm, rightArm, leftLeg, rightLeg, scale) => {
+const constrainBodyParts = (head: Matter.Body,
+    torso: Matter.Body,
+    leftArm: Matter.Body,
+    rightArm: Matter.Body,
+    leftLeg: Matter.Body,
+    rightLeg: Matter.Body,
+    scale: number) => {
+
+    const STIFFNESS = 0.6;
+
     // Constrain head
     let headConstraint = Matter.Constraint.create({
         bodyA: head,
@@ -78,7 +87,7 @@ const constrainBodyParts = (head, torso, leftArm, rightArm, leftLeg, rightLeg, s
             y: -35 * scale
         },
         bodyB: torso,
-        stiffness: 0.6,
+        stiffness: STIFFNESS,
         render: {
             visible: false
         }
@@ -103,7 +112,7 @@ const constrainBodyParts = (head, torso, leftArm, rightArm, leftLeg, rightLeg, s
                 y: -8 * scale
             },
             bodyB: arms[side],
-            stiffness: 0.6,
+            stiffness: STIFFNESS,
             render: {
                 visible: false
             }
@@ -120,7 +129,7 @@ const constrainBodyParts = (head, torso, leftArm, rightArm, leftLeg, rightLeg, s
                 y: -10 * scale
             },
             bodyB: legs[side],
-            stiffness: 0.6,
+            stiffness: STIFFNESS,
             render: {
                 visible: false
             }
@@ -130,6 +139,22 @@ const constrainBodyParts = (head, torso, leftArm, rightArm, leftLeg, rightLeg, s
     return {headConstraint, torsoJoinArm, torsoJoinLeg};
 }
 
+interface Params {
+    width: number,
+    height: number,
+    radius?: number,
+    xshift?: number,
+    yshift?: number,
+}
+
+const scaled = (obj: Params, scale: number): Params => {
+    let scaledObj: Params = {width: 0, height: 0}
+    for (let [key, value] of Object.entries(obj)) {
+        scaledObj[key] = scale * value;
+    }
+    return scaledObj;
+}
+
 /**
  * Based on Matter.js ragdoll example (https://github.com/liabru/matter-js/blob/master/examples/ragdoll.js)
  * @param x
@@ -137,22 +162,31 @@ const constrainBodyParts = (head, torso, leftArm, rightArm, leftLeg, rightLeg, s
  * @param scale
  * @param options
  */
-export const newRagdoll = (x: number, y: number, scale: number, options?) => {
+export const newRagdoll = (x: number, y: number, scale: number) => {
     scale = typeof scale === 'undefined' ? 1 : scale;
 
+    // Module aliases
     let Body = Matter.Body,
         Bodies = Matter.Bodies,
         Constraint = Matter.Constraint,
         Composite = Matter.Composite,
         Common = Matter.Common;
 
-    // Body parts
-    var head = ragdollHead(x, y - 60 * scale, 34 * scale, scale);
-    var torso = ragdollTorso(x, y, 55 * scale, 80 * scale, scale);
-    var rightArm = ragdollArm(x + 39 * scale, y - 15 * scale, 20 * scale, 40 * scale, scale, 'right-arm');
-    var leftArm = ragdollArm(x - 39 * scale, y - 15 * scale, 20 * scale, 40 * scale, scale, 'left-arm');
-    var leftLeg = ragdollLeg(x - 20 * scale, y + 57 * scale, 20 * scale, 40 * scale, scale, 'left-leg');
-    var rightLeg = ragdollLeg(x + 20 * scale, y + 57 * scale, 20 * scale, 40 * scale, scale, 'right-leg');
+    // Create physics bodies for body parts
+    // head
+    const HEAD = scaled({width: 0, height: 0, radius: 20, yshift: 60}, scale);
+    let head = ragdollHead(x, y - HEAD.yshift!, HEAD.radius!, scale);
+    // // torso
+    const TORSO = scaled({width: 20, height: 80}, scale);
+    let torso = ragdollTorso(x, y, TORSO.width, TORSO.height, scale);
+    // // arms
+    const ARMS = scaled({xshift: 24, yshift: 20, width: 12, height: 60}, scale);
+    let rightArm = ragdollArm(x + ARMS.xshift!, y - ARMS.yshift!, ARMS.width, ARMS.height, scale, 'right-arm');
+    let leftArm = ragdollArm(x - ARMS.xshift!, y - ARMS.yshift!, ARMS.width, ARMS.height, scale, 'left-arm');
+    // //legs
+    const LEGS = scaled({xshift: 20, yshift: 65, width: 15, height: 70}, scale);
+    let leftLeg = ragdollLeg(x - LEGS.xshift!, y + LEGS.yshift!, LEGS.width, LEGS.height, scale, 'left-leg');
+    let rightLeg = ragdollLeg(x + LEGS.xshift!, y + LEGS.yshift!, LEGS.width, LEGS.height, scale, 'right-leg');
 
     // Join body parts
     let constraints = constrainBodyParts(head, torso, rightArm, leftArm, leftLeg, rightLeg, scale);
